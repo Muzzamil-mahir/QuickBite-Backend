@@ -4,7 +4,7 @@ CREATE TABLE restaurants (
     owner_user_id UUID NOT NULL,
 
     name TEXT NOT NULL
-        CONSTRAINT name_len CHECK (length(name) <= 255),
+        CONSTRAINT restaurant_name_len CHECK (length(name) <= 255),
     CONSTRAINT name_not_blank
         CHECK (length(trim(name)) > 0),
 
@@ -102,8 +102,8 @@ CREATE TABLE menu_categories (
                                      REFERENCES restaurants(id)
                                          ON DELETE CASCADE,
 
-                                 name TEXT
-                                     CONSTRAINT name_len CHECK (length(name) <= 100),
+                                 name TEXT NOT NULL
+                                     CONSTRAINT menu_categories_name_len CHECK (length(name) <= 100),
 
                                  display_order INT NOT NULL DEFAULT 0,
 
@@ -112,4 +112,54 @@ CREATE TABLE menu_categories (
                                  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
                                  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE menu_items (
+                            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                            restaurant_id UUID NOT NULL
+                                REFERENCES restaurants(id)
+                                    ON DELETE CASCADE,
+
+                            category_id UUID NOT NULL
+                                REFERENCES menu_categories(id)
+                                    ON DELETE CASCADE,
+
+                            name TEXT NOT NULL
+                                CONSTRAINT menu_items_name_len
+                                    CHECK (length(name) <= 255),
+
+                            description TEXT,
+
+                            base_price NUMERIC(10, 2) NOT NULL
+                                CONSTRAINT base_price_above_zero
+                                    CHECK (base_price > 0),
+
+                            food_type TEXT NOT NULL
+                                CONSTRAINT food_type_len
+                                    CHECK (length(food_type) <= 20),
+
+                            spice_level TEXT
+                                CONSTRAINT spice_level_len
+                                    CHECK (length(spice_level) <= 20),
+
+                            calories INT,
+
+                            is_available BOOLEAN NOT NULL DEFAULT TRUE,
+
+                            is_featured BOOLEAN NOT NULL DEFAULT FALSE,
+
+                            display_order INT NOT NULL DEFAULT 0,
+
+                            avg_rating NUMERIC(3, 2)
+                                CONSTRAINT avg_rating_valid
+                                    CHECK (avg_rating >= 0 AND avg_rating <= 5),
+
+                            thumbnail_url TEXT
+                                CONSTRAINT thumbnail_url_len
+                                    CHECK (length(thumbnail_url) <= 500),
+
+                            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+                            updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
