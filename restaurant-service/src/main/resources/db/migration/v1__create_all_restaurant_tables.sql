@@ -163,3 +163,51 @@ CREATE TABLE menu_items (
 
                             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+
+CREATE TABLE item_customisation_groups (
+                                           id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                                           item_id UUID NOT NULL REFERENCES menu_items(id) ON DELETE CASCADE,
+                                           name TEXT CONSTRAINT item_customisation_groups_name_len CHECK(length(name) <= 100),
+                                           is_required BOOLEAN NOT NULL DEFAULT false,
+                                           min_selections INT NOT NULL DEFAULT 0,
+                                           max_selections INT NOT NULL DEFAULT 1,
+                                           display_order INT NOT NULL DEFAULT 0
+);
+
+
+
+CREATE TABLE item_customisation_options (
+                                            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                                            group_id UUID NOT NULL REFERENCES item_customisation_groups(id) ON DELETE CASCADE,
+                                            name TEXT NOT NULL CONSTRAINT item_customisation_groups_name_len CHECK(length(name) <= 100),
+                                            additional_price NUMERIC(10,2) NOT NULL DEFAULT 0,
+                                            is_available BOOLEAN NOT NULL DEFAULT true,
+                                            display_order INT NOT NULL DEFAULT 0
+);
+
+
+CREATE TABLE restaurant_images (
+                                   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                                   restaurant_id UUID NOT NULL REFERENCES restaurants(id) ON DELETE CASCADE,
+                                   image_url TEXT NOT NULL CONSTRAINT image_url_len CHECK(length(image_url) <= 500),
+                                   object_key TEXT NOT NULL CONSTRAINT object_key_len CHECK(length(image_url) <= 300),
+                                   image_type TEXT NOT NULL CONSTRAINT image_type_len CHECK(length(image_url) <= 50),
+                                   display_order INT NOT NULL DEFAULT 0,
+                                   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+
+CREATE TABLE restaurant_reviews(
+                                   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                                   restaurant_id UUID NOT NULL REFERENCES restaurants(id),
+                                   order_id UUID NOT NULL UNIQUE,
+                                   customer_id UUID NOT NULL,
+                                   rating INT NOT NULL CHECK(rating BETWEEN 1 AND 5),
+                                   review_text TEXT,
+                                   owner_reply TEXT,
+                                   is_flagged BOOLEAN NOT NULL DEFAULT false,
+                                   flag_reason TEXT CONSTRAINT flag_reason_len CHECK(length(flag_reason) <= 255),
+                                   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                                   replied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
