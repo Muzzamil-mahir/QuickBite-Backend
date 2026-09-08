@@ -94,3 +94,22 @@ CREATE TABLE operating_hours (
     CONSTRAINT unique_restaurant_day
         UNIQUE (restaurant_id, day_of_week)
 );
+
+CREATE TABLE menu_categories (
+                                 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                                 restaurant_id UUID NOT NULL
+                                     REFERENCES restaurants(id)
+                                         ON DELETE CASCADE,
+
+                                 name TEXT
+                                     CONSTRAINT name_len CHECK (length(name) <= 100),
+
+                                 display_order INT NOT NULL DEFAULT 0,
+
+                                 is_active BOOLEAN NOT NULL DEFAULT true,
+
+                                 created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+                                 updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
