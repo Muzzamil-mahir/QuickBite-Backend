@@ -73,3 +73,24 @@ CREATE TABLE restaurants (
 
     updated_by UUID
 );
+
+
+CREATE TABLE operating_hours (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    restaurant_id UUID NOT NULL
+        REFERENCES restaurants(id)
+        ON DELETE CASCADE,
+
+    day_of_week INT NOT NULL
+        CHECK (day_of_week BETWEEN 0 AND 6),
+
+    open_time TIME NOT NULL,
+
+    close_time TIME NOT NULL,
+
+    is_closed BOOLEAN NOT NULL DEFAULT FALSE,
+
+    CONSTRAINT unique_restaurant_day
+        UNIQUE (restaurant_id, day_of_week)
+);
