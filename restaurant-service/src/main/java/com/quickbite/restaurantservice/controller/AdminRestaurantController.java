@@ -3,14 +3,13 @@ package com.quickbite.restaurantservice.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping("/admin/restaurants")
 public class AdminRestaurantController {
+    // ==================== ADMIN ====================
 
-    // ======================= PUBLIC ========================
-
-    @GetMapping("/search")
-    public Object searchRestaurants(){
-        // TODO: call RestaurantService
+    @GetMapping
+    public Object getAllRestaurants() {
+        // TODO: Call AdminRestaurantService
         return null;
     }
 
@@ -18,73 +17,38 @@ public class AdminRestaurantController {
     public Object getRestaurant(
             @PathVariable Long id
     ) {
-        // TODO: call RestaurantService
+        // TODO: Call AdminRestaurantService
         return null;
     }
 
-    @GetMapping("/search/autocomplete")
-    public Object autocompleteRestaurants(){
-        // TODO: call RestaurantService
+    @PostMapping("/reindex")
+    public Object reindexRestaurants() {
+        // TODO: Call AdminRestaurantService
         return null;
     }
 
-    // ================== RESTAURANT OWNER ==================
-
-    @GetMapping("/my")
-    public Object getMyRestaurant() {
-        // TODO: call RestaurantService
-        return null;
-    }
-
-    @GetMapping("/{id}/hours")
-    public Object getRestaurantHours(
-            @PathVariable Long id
-    ){
-        // TODO: Call RestaurantService
-        return null;
-
-    }
-
-    @GetMapping("{id}/earnings")
-    public Object getRestaurantEarnings(
-            @PathVariable Long id
-    ){
-        // TODO: call RestaurantService
-        return null;
-    }
-
-    // =================== RESTAURANT OWNER =================
-
-    @PostMapping
-    public Object createRestaurant(){
-        // TODO: Call RestaurnatService
-        return null;
-    }
-
-    @PutMapping("/{id}")
-    public Object updateRestaurant(
-            @PathVariable Long id
-    ){
-        // TODO: Call RestaurantService
-        return null;
-    }
-
-    @PutMapping("/{id}/hours")
-    public Object updateRestaurantHours(
+    @PutMapping("/{id}/status")
+    public Object updateRestaurantStatus(
             @PathVariable Long id
     ) {
-        // TODO: Call RestaurantService
+        // TODO: Call AdminRestaurantService
         return null;
     }
 
-    // =================== RESTAURANT OWNER =======================
-
-    @PatchMapping("/{id}/availability")
-    public Object updateAvailability(
+    @PutMapping("/{id}/commission")
+    public Object updateRestaurantCommission(
             @PathVariable Long id
-    ){
-        //TODO: Call RestaurantService
+    ) {
+        // TODO: Call AdminRestaurantService
         return null;
     }
 
+    @DeleteMapping("/{id}/reviews/{reviewId}/flag")
+    public Object flagReview(
+            @PathVariable Long id,
+            @PathVariable Long reviewId
+    ) {
+        // TODO: Call AdminRestaurantService
+        return null;
+    }
 }

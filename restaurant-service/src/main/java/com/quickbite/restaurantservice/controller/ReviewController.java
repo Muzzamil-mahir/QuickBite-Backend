@@ -17,7 +17,7 @@ public class ReviewController {
     //=================== RESTAURANT OWNER =======================
 
     @PostMapping("/{id}/reviews/{reviewId}/reply")
-    public Object createReviews(
+    public Object replyToReviews(
             @PathVariable Long id,
             @PathVariable Long reviewId
     ){

@@ -3,7 +3,7 @@ package com.quickbite.restaurantservice.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/restaurnats")
+@RequestMapping("/restaurants")
 public class OrderController {
 
     //============ RESTAURANT OWNER =============
