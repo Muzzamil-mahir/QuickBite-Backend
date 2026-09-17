@@ -3,11 +3,11 @@ package com.quickbite.restaurantservice.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping("/restaurants/{id}/items/{itemId}")
 public class MediaController {
 
     // Restaurant owner
-    @PostMapping("/{id}/items/{itemId}/photos/presign")
+    @PostMapping("/photos/presign")
     public Object presignPhoto(
             @PathVariable Long id,
             @PathVariable Long itemId
@@ -15,7 +15,7 @@ public class MediaController {
         return null;
     }
 
-    @PostMapping("/{id}/items/{itemId}/photos/confirm")
+    @PostMapping("/photos/confirm")
     public Object confirmPhoto(
             @PathVariable Long id,
             @PathVariable Long itemId
@@ -23,7 +23,7 @@ public class MediaController {
         return null;
     }
 
-    @DeleteMapping("/{id}/items/{itemId}/photos/{photoId}")
+    @DeleteMapping("/photos/{photoId}")
     public Object deletePhoto(
             @PathVariable Long id,
             @PathVariable Long itemId,
