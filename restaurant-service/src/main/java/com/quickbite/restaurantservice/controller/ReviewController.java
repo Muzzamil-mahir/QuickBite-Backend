@@ -3,10 +3,10 @@ package com.quickbite.restaurantservice.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping("/restaurants/{id}/reviews")
 public class ReviewController {
     //============= PUBLIC OWNER =========================
-    @GetMapping("/{id}/reviews")
+    @GetMapping
     public Object getReviews(
             @PathVariable Long id
     ){
@@ -16,7 +16,7 @@ public class ReviewController {
 
     //=================== RESTAURANT OWNER =======================
 
-    @PostMapping("/{id}/reviews/{reviewId}/reply")
+    @PostMapping("/{reviewId}/reply")
     public Object replyToReviews(
             @PathVariable Long id,
             @PathVariable Long reviewId
