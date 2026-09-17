@@ -3,12 +3,12 @@ package com.quickbite.restaurantservice.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping("/restaurants/{id}/orders")
 public class OrderController {
 
     //============ RESTAURANT OWNER =============
 
-    @GetMapping("/{id}/orders")
+    @GetMapping
     public Object getRestaurantOrders(
             @PathVariable Long id
     ){
@@ -16,7 +16,7 @@ public class OrderController {
         return null;
     }
 
-    @PostMapping({"/{id}/orders/{orderId}/confirm"})
+    @PostMapping({"/{orderId}/confirm"})
     public Object confirmOrder(
             @PathVariable Long id,
             @PathVariable Long orderId
@@ -25,7 +25,7 @@ public class OrderController {
         return null;
     }
 
-    @PostMapping("/{id}/orders/{orderId}/reject")
+    @PostMapping("/{orderId}/reject")
     public Object rejectOrder(
             @PathVariable Long id,
             @PathVariable Long orderId
@@ -34,7 +34,7 @@ public class OrderController {
         return null;
     }
 
-    @PostMapping("{id}/orders/{orderId}/ready")
+    @PostMapping("/{orderId}/ready")
     public Object markOrderReady(
             @PathVariable Long id,
             @PathVariable Long orderId
