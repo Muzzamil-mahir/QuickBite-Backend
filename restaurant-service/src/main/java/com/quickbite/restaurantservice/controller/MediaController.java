@@ -1,58 +1,72 @@
 package com.quickbite.restaurantservice.controller;
 
+import com.quickbite.restaurantservice.dto.PresignRequest;
+import com.quickbite.restaurantservice.dto.PresignResponse;
+import com.quickbite.restaurantservice.service.MediaService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
-@RequestMapping("/restaurants/{id}")
+@RequestMapping("/restaurants/{restaurantId}")
 public class MediaController {
+
+    private final MediaService mediaService;
+
+    public MediaController(MediaService mediaService){
+        this.mediaService = mediaService;
+    }
 
     // Restaurant owner
     @PostMapping("/photos/presign")
-    public Object presignRestaurantPhoto(
-            @PathVariable Long id,
-            @PathVariable Long itemId
+    public ResponseEntity<PresignResponse> presignRestaurantPhoto(
+            @PathVariable UUID restaurantId,
+            @RequestBody PresignRequest request
     ) {
-        return null;
-    }
-
-    @PostMapping("/photos/confirm")
-    public Object confirmRestaurantPhoto(
-            @PathVariable Long id,
-            @PathVariable Long itemId
-    ){
-        return null;
+        PresignResponse obj = mediaService.getRestaurantImgUploadURL(restaurantId, request.mimeType());
+        return ResponseEntity.ok(obj);
     }
 
     @PostMapping("/items/{itemId}/photos/presign")
-    public Object presignItemPhoto(
-            @PathVariable Long id,
-            @PathVariable Long itemId
+    public ResponseEntity<PresignResponse> presignItemPhoto(
+            @PathVariable UUID restaurantId,
+            @PathVariable UUID itemId,
+            @RequestBody PresignRequest request
     ) {
+        PresignResponse obj = mediaService.getItemImgUploadURL(restaurantId,itemId, request.mimeType());
+        return ResponseEntity.ok(obj);
+    }
+
+
+    @PostMapping("/photos/confirm")
+    public Object confirmRestaurantPhoto(
+            @PathVariable UUID restaurantId
+    ){
         return null;
     }
 
     @PostMapping("/items/{itemId}/photos/confirm")
     public Object confirmItemPhoto(
-            @PathVariable Long id,
-            @PathVariable Long itemId
+            @PathVariable UUID restaurantId,
+            @PathVariable UUID itemId
     ){
         return null;
     }
 
     @DeleteMapping("/photos/{photoId}")
     public Object deleteRestaurantPhoto(
-            @PathVariable Long id,
-            @PathVariable Long itemId,
-            @PathVariable Long photoId
+            @PathVariable UUID restaurantId,
+            @PathVariable UUID photoId
     ){
         return null;
     }
 
     @DeleteMapping("/items/{itemId}/photos/{photoId}")
     public Object deleteItemPhoto(
-            @PathVariable Long id,
-            @PathVariable Long itemId,
-            @PathVariable Long photoId
+            @PathVariable UUID restaurantId,
+            @PathVariable UUID itemId,
+            @PathVariable UUID photoId
     ){
         return null;
     }
