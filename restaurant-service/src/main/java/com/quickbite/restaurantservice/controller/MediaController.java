@@ -1,7 +1,7 @@
 package com.quickbite.restaurantservice.controller;
 
-import com.quickbite.restaurantservice.dto.PresignRequest;
-import com.quickbite.restaurantservice.dto.PresignResponse;
+import com.quickbite.restaurantservice.dto.PresignRequestDto;
+import com.quickbite.restaurantservice.dto.PresignResponseDto;
 import com.quickbite.restaurantservice.service.MediaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,21 +20,21 @@ public class MediaController {
 
     // Restaurant owner
     @PostMapping("/photos/presign")
-    public ResponseEntity<PresignResponse> presignRestaurantPhoto(
+    public ResponseEntity<PresignResponseDto> presignRestaurantPhoto(
             @PathVariable UUID restaurantId,
-            @RequestBody PresignRequest request
+            @RequestBody PresignRequestDto request
     ) {
-        PresignResponse obj = mediaService.getRestaurantImgUploadURL(restaurantId, request.mimeType());
+        PresignResponseDto obj = mediaService.getRestaurantImgUploadURL(restaurantId, request.mimeType());
         return ResponseEntity.ok(obj);
     }
 
     @PostMapping("/items/{itemId}/photos/presign")
-    public ResponseEntity<PresignResponse> presignItemPhoto(
+    public ResponseEntity<PresignResponseDto> presignItemPhoto(
             @PathVariable UUID restaurantId,
             @PathVariable UUID itemId,
-            @RequestBody PresignRequest request
+            @RequestBody PresignRequestDto request
     ) {
-        PresignResponse obj = mediaService.getItemImgUploadURL(restaurantId,itemId, request.mimeType());
+        PresignResponseDto obj = mediaService.getItemImgUploadURL(restaurantId,itemId, request.mimeType());
         return ResponseEntity.ok(obj);
     }
 

@@ -1,6 +1,6 @@
 package com.quickbite.restaurantservice.service;
 
-import com.quickbite.restaurantservice.dto.PresignResponse;
+import com.quickbite.restaurantservice.dto.PresignResponseDto;
 import com.quickbite.restaurantservice.exception.InvalidMediaException;
 import com.quickbite.restaurantservice.exception.MediaStorageException;
 import com.quickbite.restaurantservice.exception.ObjectNotFoundException;
@@ -41,26 +41,26 @@ public class MediaService {
         this.redisTemplate = redisTemplate;
     }
 
-    public PresignResponse getRestaurantImgUploadURL(UUID restaurantId, String mimeType){
+    public PresignResponseDto getRestaurantImgUploadURL(UUID restaurantId, String mimeType){
         if(!isAllowedContentType(mimeType)){
             throw new InvalidMediaException("Unsupported image type" + mimeType);
         }
         String objectKey = "restaurants/" + restaurantId + "/photos/" + UUID.randomUUID() + "." + MIME_TO_EXTENSION.get(mimeType);
         String uploadUrl = getPresignedUrl(objectKey);
         storePendingUpload(objectKey);
-        return  new PresignResponse(
+        return  new PresignResponseDto(
                 uploadUrl,
                 objectKey
         );
     }
-    public PresignResponse getItemImgUploadURL(UUID restaurantId, UUID itemId, String mimeType){
+    public PresignResponseDto getItemImgUploadURL(UUID restaurantId, UUID itemId, String mimeType){
         if(!isAllowedContentType(mimeType)){
             throw new InvalidMediaException("Unsupported image type" + mimeType);
         }
         String objectKey = "restaurants/" + restaurantId + "/items/" + itemId + "/photos/" + UUID.randomUUID() + "." + MIME_TO_EXTENSION.get(mimeType);
         String uploadUrl = getPresignedUrl(objectKey);
         storePendingUpload(objectKey);
-        return  new PresignResponse(
+        return  new PresignResponseDto(
                 uploadUrl,
                 objectKey
         );
