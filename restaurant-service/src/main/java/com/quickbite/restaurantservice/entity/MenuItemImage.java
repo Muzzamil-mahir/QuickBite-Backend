@@ -36,4 +36,12 @@ public class MenuItemImage {
 
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
+
+    public MenuItemImage( MenuItem item, String objectKey, String imageUrl, int displayOrder, OffsetDateTime createdAt) {
+        this.item = item;
+        this.objectKey = objectKey;
+        this.imageUrl = imageUrl;
+        this.displayOrder = displayOrder;
+        this.createdAt = createdAt;
+    }
 }

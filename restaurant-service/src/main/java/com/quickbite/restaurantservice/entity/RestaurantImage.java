@@ -14,6 +14,15 @@ import java.util.UUID;
 @DynamicUpdate
 public class RestaurantImage {
 
+    public RestaurantImage(Restaurants restaurant, String imageUrl, String objectKey, ImageType imageType, int displayOrder, OffsetDateTime createdAt) {
+        this.restaurant = restaurant;
+        this.imageUrl = imageUrl;
+        this.objectKey = objectKey;
+        this.imageType = imageType;
+        this.displayOrder = displayOrder;
+        this.createdAt = createdAt;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -31,6 +40,8 @@ public class RestaurantImage {
 
     @Column(name = "object_key", nullable = false, length = 300)
     private String objectKey;
+
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "image_type", nullable = false)

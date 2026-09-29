@@ -19,6 +19,7 @@ public class Restaurants {
     @Column(name = "id")
     private UUID restaurantId;
 
+
     @Column(name = "owner_user_id", nullable = false)
     private UUID ownerUserId;
 
@@ -106,6 +107,10 @@ public class Restaurants {
 
     @Column(name = "updated_by")
     private UUID updatedBy;
+
+    public UUID getRestaurantId() {
+        return restaurantId;
+    }
 
 
 }
