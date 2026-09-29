@@ -1,5 +1,6 @@
 package com.quickbite.restaurantservice.controller;
 
+import com.quickbite.restaurantservice.dto.ConfirmRequestDto;
 import com.quickbite.restaurantservice.dto.PresignRequestDto;
 import com.quickbite.restaurantservice.dto.PresignResponseDto;
 import com.quickbite.restaurantservice.service.MediaService;
@@ -41,7 +42,8 @@ public class MediaController {
 
     @PostMapping("/photos/confirm")
     public Object confirmRestaurantPhoto(
-            @PathVariable UUID restaurantId
+            @PathVariable UUID restaurantId,
+            @RequestBody ConfirmRequestDto request
     ){
         return null;
     }
@@ -49,7 +51,8 @@ public class MediaController {
     @PostMapping("/items/{itemId}/photos/confirm")
     public Object confirmItemPhoto(
             @PathVariable UUID restaurantId,
-            @PathVariable UUID itemId
+            @PathVariable UUID itemId,
+            @RequestBody ConfirmRequestDto request
     ){
         return null;
     }

@@ -21,6 +21,7 @@ public class MenuItem {
     @Column(name = "id")
     private UUID menuItemId;
 
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
             name = "restaurant_id",
@@ -77,4 +78,9 @@ public class MenuItem {
 
     @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updatedAt;
+
+    public Restaurants getRestaurant() {
+        return restaurant;
+    }
+
 }
