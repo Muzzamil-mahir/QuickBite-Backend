@@ -1,4 +1,4 @@
-package com.quickbite.restaurantservice.dto;
+package com.quickbite.restaurantservice.dto.response;
 
 public record PresignResponseDto(
     String uploadUrl,

@@ -21,6 +21,15 @@ import java.util.UUID;
 @DynamicUpdate
 public class OperatingHours {
 
+    protected OperatingHours(){}
+    public OperatingHours(Restaurants restaurant, int dayOfWeek, LocalTime openTime, LocalTime closeTime, boolean isClosed) {
+        this.restaurant = restaurant;
+        this.dayOfWeek = dayOfWeek;
+        this.openTime = openTime;
+        this.closeTime = closeTime;
+        this.isClosed = isClosed;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")

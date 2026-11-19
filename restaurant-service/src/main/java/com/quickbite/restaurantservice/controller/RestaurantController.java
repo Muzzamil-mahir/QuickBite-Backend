@@ -1,5 +1,6 @@
 package com.quickbite.restaurantservice.controller;
 
+import com.quickbite.restaurantservice.dto.request.CreateRestaurantRequestDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -53,7 +54,9 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public Object createRestaurant() {
+    public Object createRestaurant(
+            @RequestBody CreateRestaurantRequestDto request
+            ) {
         // TODO: Call RestaurantService
         return null;
     }

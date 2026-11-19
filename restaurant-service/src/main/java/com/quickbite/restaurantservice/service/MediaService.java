@@ -1,7 +1,7 @@
 package com.quickbite.restaurantservice.service;
 
-import com.quickbite.restaurantservice.dto.ConfirmResponseDto;
-import com.quickbite.restaurantservice.dto.PresignResponseDto;
+import com.quickbite.restaurantservice.dto.response.ConfirmResponseDto;
+import com.quickbite.restaurantservice.dto.response.PresignResponseDto;
 import com.quickbite.restaurantservice.entity.MenuItem;
 import com.quickbite.restaurantservice.entity.MenuItemImage;
 import com.quickbite.restaurantservice.entity.RestaurantImage;

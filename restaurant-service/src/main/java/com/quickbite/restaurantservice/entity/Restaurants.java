@@ -43,19 +43,19 @@ public class Restaurants {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private RestaurantStatus status;
+    private RestaurantStatus status = RestaurantStatus.PENDING;
 
     @Column(name = "rejection_reason")
     private String rejectionReason;
 
     @Column(name = "is_open", nullable = false)
-    private boolean isOpen;
+    private boolean isOpen = false;
 
     @Column(name = "manual_override", nullable = false)
-    private boolean manualOverride;
+    private boolean manualOverride = false;
 
     @Column(name = "commission_pct", nullable = false, precision = 5, scale = 2)
-    private BigDecimal commissionPct;
+    private BigDecimal commissionPct = new BigDecimal("15.00");
 
     @Column(name = "min_order_value", nullable = false, precision = 10, scale = 2)
     private BigDecimal minOrderValue;
@@ -107,6 +107,42 @@ public class Restaurants {
 
     @Column(name = "updated_by")
     private UUID updatedBy;
+
+    protected  Restaurants(){}
+    public Restaurants(
+            UUID ownerUserId,
+            String name,
+            String slug,
+            String description,
+            String phoneNumber,
+            String fssaiNumber,
+            String gstin,
+            String addressLine,
+            String city,
+            String pincode,
+            BigDecimal latitude,
+            BigDecimal longitude,
+            String bankAccountNumber,
+            String bankIfsc,
+            String bankAccountName
+    ) {
+        this.ownerUserId = ownerUserId;
+        this.name = name;
+        this.slug = slug;
+        this.description = description;
+        this.phoneNumber = phoneNumber;
+        this.fssaiNumber = fssaiNumber;
+        this.gstin = gstin;
+        this.addressLine = addressLine;
+        this.city = city;
+        this.pincode = pincode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.bankAccountNumber = bankAccountNumber;
+        this.bankIfsc = bankIfsc;
+        this.bankAccountName = bankAccountName;
+    }
+
 
     public UUID getRestaurantId() {
         return restaurantId;

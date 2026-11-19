@@ -1,8 +1,8 @@
 package com.quickbite.restaurantservice.controller;
 
-import com.quickbite.restaurantservice.dto.ConfirmRequestDto;
-import com.quickbite.restaurantservice.dto.PresignRequestDto;
-import com.quickbite.restaurantservice.dto.PresignResponseDto;
+import com.quickbite.restaurantservice.dto.request.ConfirmRequestDto;
+import com.quickbite.restaurantservice.dto.request.PresignRequestDto;
+import com.quickbite.restaurantservice.dto.response.PresignResponseDto;
 import com.quickbite.restaurantservice.service.MediaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
